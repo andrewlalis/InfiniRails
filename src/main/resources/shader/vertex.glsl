@@ -9,12 +9,14 @@ uniform mat3 normalTransform;
 uniform mat4 projectionTransform;
 uniform mat4 viewTransform;
 
+out vec3 vertexPosition;
 out vec3 vertexColor;
 out vec3 vertexNormal;
 out vec3 fragmentPosition;
 
 void main() {
     gl_Position = projectionTransform * viewTransform * modelTransform * vec4(vertexPositionIn, 1.0);
+    vertexPosition = vertexPositionIn;
     vertexColor = vertexColorIn;
     vertexNormal = normalize(normalTransform * vertexNormalIn);
     fragmentPosition = vec3(modelTransform * vec4(vertexPositionIn, 1.0));
