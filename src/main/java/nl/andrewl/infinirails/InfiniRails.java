@@ -27,9 +27,9 @@ public class InfiniRails {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 		World world = new World();
-		world.getCamera().setPosition(0, -20, 0);
+		world.getCamera().setPosition(50, 20, 50);
 
-		long windowHandle = glfwCreateWindow(800, 600, "InfiniRails", NULL, NULL);
+		long windowHandle = glfwCreateWindow(1200, 800, "InfiniRails", NULL, NULL);
 		if (windowHandle == NULL) throw new RuntimeException("Failed to create GLFW window.");
 		glfwSetKeyCallback(windowHandle, (window, key, scancode, action, mods) -> {
 			if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
@@ -73,11 +73,6 @@ public class InfiniRails {
 		glCullFace(GL_BACK);
 
 		world.generateFragment(new Vector2i(0, 0));
-		world.generateFragment(new Vector2i(0, 1));
-		world.generateFragment(new Vector2i(0, -1));
-		world.generateFragment(new Vector2i(-1, 0));
-		world.generateFragment(new Vector2i(1, 0));
-		world.generateFragment(new Vector2i(2, 0));
 
 		Matrix4f projectionTransform = new Matrix4f();
 		projectionTransform.perspective(70, 800 / 600.0f, 0.01f, 1000.0f);
@@ -106,7 +101,7 @@ public class InfiniRails {
 			glUniformMatrix4fv(viewTransformUniform, false, world.getCamera().getViewTransformValues());
 			glUniform3fv(cameraPositionUniform, world.getCamera().getPositionValues());
 
-			for (var terrainFragment : world.getTerrainFragments()) {
+			for (var terrainFragment : world.getFragmentsNearPlayer()) {
 				glUniformMatrix4fv(modelTransformUniform, false, terrainFragment.getWorldTransform().get(new float[16]));
 				glUniformMatrix3fv(normalTransformUniform, false, terrainFragment.getNormalTransform().get(new float[9]));
 				terrainFragment.draw();
@@ -127,10 +122,10 @@ public class InfiniRails {
 			if (glfwGetKey(windowHandle, GLFW_KEY_D) == GLFW_PRESS) {
 				world.updateCameraPosition(new Vector3f(1, 0, 0));
 			}
-			if (glfwGetKey(windowHandle, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+			if (glfwGetKey(windowHandle, GLFW_KEY_SPACE) == GLFW_PRESS) {
 				world.updateCameraPosition(new Vector3f(0, -1, 0));
 			}
-			if (glfwGetKey(windowHandle, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+			if (glfwGetKey(windowHandle, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
 				world.updateCameraPosition(new Vector3f(0, 1, 0));
 			}
 		}

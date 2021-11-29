@@ -32,8 +32,8 @@ public class TerrainFragment {
 	public TerrainFragment(World world, Vector2i index, OpenSimplexNoise noise) {
 		this.world = world;
 		this.index = index;
-		float originX = index.x * (World.TERRAIN_FRAGMENT_SIZE);
-		float originY = index.y * (World.TERRAIN_FRAGMENT_SIZE);
+		float originX = (index.x) * (World.TERRAIN_FRAGMENT_SIZE);
+		float originY = (index.y) * (World.TERRAIN_FRAGMENT_SIZE);
 		this.heightmap = new float[World.TERRAIN_FRAGMENT_SIZE + 1][World.TERRAIN_FRAGMENT_SIZE + 1];
 		this.center = new Vector2f(originX + World.TERRAIN_FRAGMENT_SIZE / 2.0f, originY + World.TERRAIN_FRAGMENT_SIZE / 2.0f);
 		buildHeightmap(noise, originX, originY);

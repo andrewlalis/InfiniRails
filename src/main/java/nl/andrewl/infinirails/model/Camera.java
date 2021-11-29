@@ -25,13 +25,13 @@ public class Camera {
 	}
 
 	private void updateViewTransform() {
-		float horizontalAngle = Math.toRadians(orientation.x);
+		float horizontalAngle = Math.toRadians(-orientation.x);
 		float verticalAngle = Math.toRadians(orientation.y * -1);
 //		System.out.printf("Camera orientation: %.2f degrees horizontal => %.2f rad, %.2f degrees vertical => %.2f rad\n", orientation.x, horizontalAngle, orientation.y, verticalAngle);
 		viewTransform.identity();
 		viewTransform.rotate(verticalAngle, new Vector3f(1, 0, 0));
 		viewTransform.rotate(horizontalAngle, UP);
-		viewTransform.translate(position);
+		viewTransform.translate(-position.x, position.y, -position.z);
 		viewTransform.get(viewTransformValues);
 	}
 
@@ -55,7 +55,7 @@ public class Camera {
 	}
 
 	public void moveOrientation(float x, float y) {
-		orientation.x = (float) MathUtils.normalize(orientation.x + x, 0, 360);
+		orientation.x = (float) MathUtils.normalize(orientation.x - x, 0, 360);
 		orientation.y = Math.max(-90, Math.min(90, orientation.y + y));
 		updateViewTransform();
 	}
