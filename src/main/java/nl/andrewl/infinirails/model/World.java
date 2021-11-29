@@ -24,6 +24,8 @@ public class World {
 	 */
 	public static final float TERRAIN_FRAGMENT_SCALE = 1.0f;
 
+	public static final float MOVEMENT_SPEED = 0.1f;
+
 	public static final int RENDER_RADIUS = 5;
 
 	@Getter
@@ -39,7 +41,7 @@ public class World {
 	}
 
 	public void updateCameraPosition(Vector3f m) {
-		camera.movePosition(m);
+		camera.movePosition(m.mul(MOVEMENT_SPEED));
 		Vector2f cameraHorizontalPos = new Vector2f(camera.getPosition().x, camera.getPosition().z);
 		var fragIndex = getTerrainFragmentIndex(cameraHorizontalPos);
 //		System.out.printf("Pos: [%.2f, %.2f] => Frag: [%d, %d]\n", cameraHorizontalPos.x, cameraHorizontalPos.y, fragIndex.x, fragIndex.y);

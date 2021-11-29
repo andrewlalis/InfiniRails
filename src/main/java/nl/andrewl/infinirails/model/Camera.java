@@ -27,7 +27,6 @@ public class Camera {
 	private void updateViewTransform() {
 		float horizontalAngle = Math.toRadians(-orientation.x);
 		float verticalAngle = Math.toRadians(orientation.y * -1);
-//		System.out.printf("Camera orientation: %.2f degrees horizontal => %.2f rad, %.2f degrees vertical => %.2f rad\n", orientation.x, horizontalAngle, orientation.y, verticalAngle);
 		viewTransform.identity();
 		viewTransform.rotate(verticalAngle, new Vector3f(1, 0, 0));
 		viewTransform.rotate(horizontalAngle, UP);

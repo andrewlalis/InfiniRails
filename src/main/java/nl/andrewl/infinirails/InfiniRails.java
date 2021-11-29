@@ -77,7 +77,7 @@ public class InfiniRails {
 		Matrix4f projectionTransform = new Matrix4f();
 		projectionTransform.perspective(70, 800 / 600.0f, 0.01f, 1000.0f);
 
-		Vector3f lightPosition = new Vector3f(0, -300, 500);
+		Vector3f lightPosition = new Vector3f(0, -10000000, 0);
 		Vector3f lightColor = new Vector3f(1.0f, 0.8f, 0.8f);
 
 		int prog = createShaderProgram();
